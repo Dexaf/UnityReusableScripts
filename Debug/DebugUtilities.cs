@@ -9,11 +9,13 @@ public static class DebugUtilities
     /// </summary>
     public static void DrawPrimitive(Vector3 position, float scale, PrimitiveType primitiveType, Color color, float time = 1f)
     {
+#if UNITY_EDITOR
         GameObject sphere = GameObject.CreatePrimitive(primitiveType);
         sphere.transform.localScale = new Vector3(scale, scale, scale);
         sphere.transform.position = position;
         sphere.GetComponent<Renderer>().material.color = color;
         sphere.AddComponent<DestroySelf>();
+#endif
     }
 }
 
