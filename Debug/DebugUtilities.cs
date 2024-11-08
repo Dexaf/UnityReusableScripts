@@ -14,13 +14,15 @@ public static class DebugUtilities
         sphere.transform.localScale = new Vector3(scale, scale, scale);
         sphere.transform.position = position;
         sphere.GetComponent<Renderer>().material.color = color;
-        sphere.AddComponent<DestroySelf>();
+        sphere.AddComponent<DestroySelf>().time = time;
 #endif
     }
 }
 
 public class DestroySelf : MonoBehaviour
 {
+    public float time = 1f;
+
     public void Start()
     {
         StartCoroutine(SelfDestruct());
@@ -28,7 +30,7 @@ public class DestroySelf : MonoBehaviour
 
     private IEnumerator SelfDestruct()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
 }
